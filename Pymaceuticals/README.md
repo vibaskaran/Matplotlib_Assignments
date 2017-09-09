@@ -1,10 +1,30 @@
 
+# Pymaceuticals Inc.
+
+## Analysis
+
+- OBSERVED TREND 1
+    
+    - Treatment including Capomulin exhibits a decrease in tumor size.
+    
+    
+- OBSERVED TREND 2
+
+    - Treatment including Capomulin exhibits slower spread of metastatic sites.
+
+
+- OBSERVED TREND 3
+
+    - Treatment including Capomulin exhibits slower decrease in survival rates.
+
+
 
 ```python
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+import seaborn as sn
+from math import trunc
 ```
 
 
@@ -367,8 +387,6 @@ Tumor_volume
 ```python
 Timepoint = Tumor_response.index
 plt.figure(figsize=(12,8))
-#legend_text = ['Capomulin', 'Ceftamin', 'Infubinol', 'Ketapril', 'Naftisol', 'Placebo', 'Propriva', 'Ramicane', 'Stelasyn', 'Zoniferol']
-
 plt.errorbar(Timepoint, Tumor_response['Capomulin'],yerr=Tumor_response['Capomulin'].sem(), marker ='o', linestyle='--', label="Capomulin")
 plt.errorbar(Timepoint, Tumor_response['Ceftamin'],yerr=Tumor_response['Ceftamin'].sem(), marker ='^', linestyle='--', label="Ceftamin")
 plt.errorbar(Timepoint, Tumor_response['Infubinol'],yerr=Tumor_response['Infubinol'].sem(), marker ='s', linestyle='--', label="Infubinol")
@@ -387,7 +405,7 @@ plt.show()
 ```
 
 
-![png](output_10_0.png)
+![png](output_11_0.png)
 
 
 
@@ -648,25 +666,24 @@ Metastatic_sites
 Metastatic = Metastatic_sites.index
 plt.figure(figsize=(12,8))
 
-plt.errorbar(Metastatic, Metastatic_sites['Capomulin'],yerr=Tumor_response['Capomulin'].sem(), marker ='o', linestyle='--', label="Capomulin")
-plt.errorbar(Metastatic, Metastatic_sites['Ceftamin'],yerr=Tumor_response['Ceftamin'].sem(), marker ='^', linestyle='--', label="Ceftamin")
-plt.errorbar(Metastatic, Metastatic_sites['Infubinol'],yerr=Tumor_response['Infubinol'].sem(), marker ='s', linestyle='--', label="Infubinol")
-plt.errorbar(Metastatic, Metastatic_sites['Ketapril'],yerr=Tumor_response['Ketapril'].sem(), marker ='p', linestyle='--', label="Ketapril")
-plt.errorbar(Metastatic, Metastatic_sites['Naftisol'],yerr=Tumor_response['Naftisol'].sem(), marker ='+', linestyle='--', label="Naftisol")
-plt.errorbar(Metastatic, Metastatic_sites['Placebo'],yerr=Tumor_response['Placebo'].sem(), marker ='d', linestyle='--', label="Placebo")
-plt.errorbar(Metastatic, Metastatic_sites['Propriva'],yerr=Tumor_response['Propriva'].sem(), marker ='4', linestyle='--', label="Propriva")
-plt.errorbar(Metastatic, Metastatic_sites['Ramicane'],yerr=Tumor_response['Ramicane'].sem(), marker ='*', linestyle='--', label="Ramicane")
-plt.errorbar(Metastatic, Metastatic_sites['Stelasyn'],yerr=Tumor_response['Stelasyn'].sem(), marker ='h', linestyle='--', label="Stelasyn")
-plt.errorbar(Metastatic, Metastatic_sites['Zoniferol'],yerr=Tumor_response['Zoniferol'].sem(), marker ='1', linestyle='--', label="Zoniferol")
+plt.plot(Metastatic, Metastatic_sites['Capomulin'], marker ='o', linestyle='--', label="Capomulin")
+plt.plot(Metastatic, Metastatic_sites['Ceftamin'], marker ='^', linestyle='--', label="Ceftamin")
+plt.plot(Metastatic, Metastatic_sites['Infubinol'], marker ='s', linestyle='--', label="Infubinol")
+plt.plot(Metastatic, Metastatic_sites['Ketapril'], marker ='p', linestyle='--', label="Ketapril")
+plt.plot(Metastatic, Metastatic_sites['Naftisol'], marker ='+', linestyle='--', label="Naftisol")
+plt.plot(Metastatic, Metastatic_sites['Placebo'], marker ='d', linestyle='--', label="Placebo")
+plt.plot(Metastatic, Metastatic_sites['Propriva'], marker ='4', linestyle='--', label="Propriva")
+plt.plot(Metastatic, Metastatic_sites['Ramicane'], marker ='*', linestyle='--', label="Ramicane")
+plt.plot(Metastatic, Metastatic_sites['Stelasyn'], marker ='h', linestyle='--', label="Stelasyn")
+plt.plot(Metastatic, Metastatic_sites['Zoniferol'], marker ='1', linestyle='--', label="Zoniferol")
 plt.gca().set(xlabel = 'Treatment Duration (Days)', ylabel = 'Met. Sites',title = 'Metastatic Spread During Treatment',xlim = (0,max(Metastatic)))
-#plt.legend(handles=legend_text, loc="best")
 plt.legend(loc = 'best', frameon=True)
 plt.grid()
 plt.show()
 ```
 
 
-![png](output_13_0.png)
+![png](output_14_0.png)
 
 
 ### Survival Rates
@@ -1120,16 +1137,16 @@ Survival_rate =  Survival_percentage.index
 
 plt.figure(figsize=(12,8))
 
-plt.errorbar(Survival_rate, Survival_percentage['Capomulin'],yerr=Tumor_response['Capomulin'].sem(), marker ='o', linestyle='--', label="Capomulin")
-plt.errorbar(Survival_rate, Survival_percentage['Ceftamin'],yerr=Tumor_response['Ceftamin'].sem(), marker ='^', linestyle='--', label="Ceftamin")
-plt.errorbar(Survival_rate, Survival_percentage['Infubinol'],yerr=Tumor_response['Infubinol'].sem(), marker ='s', linestyle='--', label="Infubinol")
-plt.errorbar(Survival_rate, Survival_percentage['Ketapril'],yerr=Tumor_response['Ketapril'].sem(), marker ='p', linestyle='--', label="Ketapril")
-plt.errorbar(Survival_rate, Survival_percentage['Naftisol'],yerr=Tumor_response['Naftisol'].sem(), marker ='+', linestyle='--', label="Naftisol")
-plt.errorbar(Survival_rate, Survival_percentage['Placebo'],yerr=Tumor_response['Placebo'].sem(), marker ='d', linestyle='--', label="Placebo")
-plt.errorbar(Survival_rate, Survival_percentage['Propriva'],yerr=Tumor_response['Propriva'].sem(), marker ='4', linestyle='--', label="Propriva")
-plt.errorbar(Survival_rate, Survival_percentage['Ramicane'],yerr=Tumor_response['Ramicane'].sem(), marker ='*', linestyle='--', label="Ramicane")
-plt.errorbar(Survival_rate, Survival_percentage['Stelasyn'],yerr=Tumor_response['Stelasyn'].sem(), marker ='h', linestyle='--', label="Stelasyn")
-plt.errorbar(Survival_rate, Survival_percentage['Zoniferol'],yerr=Tumor_response['Zoniferol'].sem(), marker ='1', linestyle='--', label="Zoniferol")
+plt.plot(Survival_rate, Survival_percentage['Capomulin'], marker ='o', linestyle='--', label="Capomulin")
+plt.plot(Survival_rate, Survival_percentage['Ceftamin'], marker ='^', linestyle='--', label="Ceftamin")
+plt.plot(Survival_rate, Survival_percentage['Infubinol'], marker ='s', linestyle='--', label="Infubinol")
+plt.plot(Survival_rate, Survival_percentage['Ketapril'], marker ='p', linestyle='--', label="Ketapril")
+plt.plot(Survival_rate, Survival_percentage['Naftisol'], marker ='+', linestyle='--', label="Naftisol")
+plt.plot(Survival_rate, Survival_percentage['Placebo'], marker ='d', linestyle='--', label="Placebo")
+plt.plot(Survival_rate, Survival_percentage['Propriva'], marker ='4', linestyle='--', label="Propriva")
+plt.plot(Survival_rate, Survival_percentage['Ramicane'], marker ='*', linestyle='--', label="Ramicane")
+plt.plot(Survival_rate, Survival_percentage['Stelasyn'], marker ='h', linestyle='--', label="Stelasyn")
+plt.plot(Survival_rate, Survival_percentage['Zoniferol'], marker ='1', linestyle='--', label="Zoniferol")
 plt.gca().set(xlabel = 'Time (Days)', ylabel = 'Survival Rate(%)',title = 'Survival During Treatment',xlim = (0,max(Survival_rate)))
 plt.legend(loc = 'best', frameon=True)
 plt.grid()
@@ -1137,64 +1154,114 @@ plt.show()
 ```
 
 
-![png](output_18_0.png)
+![png](output_19_0.png)
+
+
+### Summary Bar Graph
+
+
+```python
+TumorChangePercent = (((Tumor_response.iloc[-1]-Tumor_response.iloc[0])/Tumor_response.iloc[0])*100).to_frame("% Change")
+TumorChangePercent
+```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>% Change</th>
+    </tr>
+    <tr>
+      <th>Drug</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Capomulin</th>
+      <td>-19.475303</td>
+    </tr>
+    <tr>
+      <th>Ceftamin</th>
+      <td>42.516492</td>
+    </tr>
+    <tr>
+      <th>Infubinol</th>
+      <td>46.123472</td>
+    </tr>
+    <tr>
+      <th>Ketapril</th>
+      <td>57.028795</td>
+    </tr>
+    <tr>
+      <th>Naftisol</th>
+      <td>53.923347</td>
+    </tr>
+    <tr>
+      <th>Placebo</th>
+      <td>51.297960</td>
+    </tr>
+    <tr>
+      <th>Propriva</th>
+      <td>47.241175</td>
+    </tr>
+    <tr>
+      <th>Ramicane</th>
+      <td>-22.320900</td>
+    </tr>
+    <tr>
+      <th>Stelasyn</th>
+      <td>52.085134</td>
+    </tr>
+    <tr>
+      <th>Zoniferol</th>
+      <td>46.579751</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 
 
 ```python
-plt.figure(figsize=(12,8))
-TumorVolume = combined.groupby(["Drug","Timepoint"])["Tumor Volume (mm3)"].mean().to_frame("Tumor Volume (mm3)")
-TumorVolume.reset_index(inplace=True)
-TumorVolumeChangePivot = TumorVolume.pivot(index="Timepoint", columns="Drug")["Tumor Volume (mm3)"]
-#subtract the first volume (iloc[0]) from the last volume (iloc[-1]), divide by the first volume (iloc[0]), multiply by 100
-TumorChangePercent = (((TumorVolumeChangePivot.iloc[-1]-TumorVolumeChangePivot.iloc[0])/TumorVolumeChangePivot.iloc[0])*100).to_frame("% Change")
-color=[]
-print(TumorChangePercent)
-for p in TumorChangePercent["% Change"]:
-    if p < 0:
-        color.append("green")
+x=TumorChangePercent.index
+y=TumorChangePercent['% Change']
+plt.figure(figsize=(16,8))
+colors = ['red' if _y >=0 else 'green' for _y in y]
+ax = sn.barplot(x, y, palette=colors)
+for n, (label, _y) in enumerate(zip(x, y)):
+    if _y <= 0:
+        ax.annotate(
+            s='{:d}%'.format(trunc(_y)), xy=(n, -10), ha='center',va='center',
+            xytext=(0,10), color='w', textcoords='offset points', weight='bold')
     else:
-        color.append("red")
-    
-TumorChangePercent.plot(kind="bar", color=color, alpha=.65, rot=0)
-#remove the legend
-plt.legend("")
-
-# add the percentages on the bars
-x_axis = np.arange(len(TumorChangePercent))
-for a,b in zip(x_axis, TumorChangePercent["% Change"]):
-    if b<0:
-        plt.text(a-.1, b-b - 3, "{:.0f}%".format(b))
-    else:
-        plt.text(a-.075, b - b + 1, "{:.0f}%".format(b))
-
-plt.title("Capomulin Exhibits Tumor Shrinkage Over 45 Day Treatment")
-plt.xlabel("Drug")
-plt.ylabel("% Tumor Volume Change")  
-plt.axhline(y=0, c="gray", alpha=.45)
-
-    
+        ax.annotate(
+            s='{:d}%'.format(trunc(_y)), xy=(n, 0), ha='center',va='center',
+            xytext=(0,10), color='w', textcoords='offset points', weight='bold')  
+plt.gca().set(xlabel='Drug', ylabel='% Tumor Volume Change', title='Tumor Change Over 45 Day Treatment')
+plt.rc('grid', linestyle="--", color='black', linewidth=0.5)
+plt.grid(True)
 plt.show()
 ```
 
-                % Change
-    Drug                
-    Capomulin -19.475303
-    Ceftamin   42.516492
-    Infubinol  46.123472
-    Ketapril   57.028795
-    Naftisol   53.923347
-    Placebo    51.297960
-    Propriva   47.241175
-    Ramicane  -22.320900
-    Stelasyn   52.085134
-    Zoniferol  46.579751
-    
 
-
-    <matplotlib.figure.Figure at 0x266966aeac8>
-
-
-
-![png](output_19_2.png)
+![png](output_22_0.png)
 
